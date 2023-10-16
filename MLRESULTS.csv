@@ -1,0 +1,16 @@
+Negocio,Estado,Categ_Sentimiento,Calificacion_promedio,Numero_reviews,Estado_California,Estado_Colorado,Estado_Georgia,Estado_NY,Estado_Texas,Negocio_kfc,Sentimiento_Negativo,Sentimiento_Neutral,Sentimiento_Positivo
+kfc,California,Negativo,3.602469135802469,243,1,0,0,0,0,1,1,0,0
+kfc,California,Neutral,3.6528301886792454,106,1,0,0,0,0,1,0,1,0
+kfc,California,Positivo,3.689406099518459,623,1,0,0,0,0,1,0,0,1
+kfc,Colorado,Negativo,2.946766169154229,201,0,1,0,0,0,1,1,0,0
+kfc,Colorado,Neutral,2.9865671641791045,67,0,1,0,0,0,1,0,1,0
+kfc,Colorado,Positivo,3.143581081081081,296,0,1,0,0,0,1,0,0,1
+kfc,Georgia,Negativo,3.261052631578947,285,0,0,1,0,0,1,1,0,0
+kfc,Georgia,Neutral,3.336708860759494,79,0,0,1,0,0,1,0,1,0
+kfc,Georgia,Positivo,3.396195652173913,552,0,0,1,0,0,1,0,0,1
+kfc,NY,Negativo,3.424074074074074,216,0,0,0,1,0,1,1,0,0
+kfc,NY,Neutral,3.441666666666667,84,0,0,0,1,0,1,0,1,0
+kfc,NY,Positivo,3.538034188034188,468,0,0,0,1,0,1,0,0,1
+kfc,Texas,Negativo,3.42389705882353,272,0,0,0,0,1,1,1,0,0
+kfc,Texas,Neutral,3.4762500000000003,80,0,0,0,0,1,1,0,1,0
+kfc,Texas,Positivo,3.6242524916943526,602,0,0,0,0,1,1,0,0,1
