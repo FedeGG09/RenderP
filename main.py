@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 from pydantic import BaseModel
 import pandas as pd
 from sklearn.linear_model import LinearRegression
@@ -21,12 +21,15 @@ model.fit(X, y)
 class EstadoInput(BaseModel):
     Estado: str  # Ejemplo: 'California'
 
-@app.post('/predict/')
-def predict(data: EstadoInput):
-    estado = data.Estado
+class PredictionResponse(BaseModel):
+    estado: str
+    prediction: float
 
+# Ruta para ingresar el estado y obtener una predicción
+@app.post('/predict/', response_model=PredictionResponse)
+def predict(estado: str = Form(...)):
     if f'Estado_{estado}' not in X.columns:
-        return {"error": f"El estado {estado} no está en el conjunto de datos"}
+        return PredictionResponse(estado="Error", prediction=-1.0)
 
     input_data = [0] * len(X.columns)  # Inicializar con ceros para todas las columnas
     input_data[X.columns.get_loc(f'Estado_{estado}')] = 1  # Establecer la columna del estado en 1
@@ -34,4 +37,4 @@ def predict(data: EstadoInput):
 
     prediction = model.predict([input_data])
 
-    return {"Estado": estado, "prediction": prediction[0]}
+    return PredictionResponse(estado=estado, prediction=prediction[0])
