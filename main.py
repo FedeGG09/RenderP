@@ -19,27 +19,27 @@ y = df['Calificacion_promedio']
 model = LinearRegression()
 model.fit(X, y)
 
-class RestaurantData(BaseModel):
-    Estado_California: int
-    Estado_Colorado: int
-    Estado_Georgia: int
-    Estado_NY: int
-    Estado_Texas: int
-    Negocio_kfc: int
-    Sentimiento_Negativo: int
-    Sentimiento_Neutral: int
-    Sentimiento_Positivo: int
-    Numero_reviews: int
+class RestaurantScenario(BaseModel):
+    Estado: str  # Example: 'California'
+    Negocio: str  # Example: 'kfc'
 
 @app.post('/predict/')
-def predict(data: List[RestaurantData]):
+def predict(data: List[RestaurantScenario]):
     predictions = []
-    for entry in data:
-        input_data = [entry.Estado_California, entry.Estado_Colorado, entry.Estado_Georgia, entry.Estado_NY,
-                      entry.Estado_Texas, entry.Negocio_kfc, entry.Sentimiento_Negativo, entry.Sentimiento_Neutral,
-                      entry.Sentimiento_Positivo, entry.Numero_reviews]
+    for scenario in data:
+        # Get the index corresponding to the state and restaurant chain
+        state_column = f'Estado_{scenario.Estado}'
+        chain_column = f'Negocio_{scenario.Negocio}'
+
+        input_data = [0] * len(X.columns)  # Initialize with zeros for all columns
+        input_data[X.columns.get_loc(state_column)] = 1  # Set the state column to 1
+        input_data[X.columns.get_loc(chain_column)] = 1  # Set the restaurant chain column to 1
 
         prediction = model.predict([input_data])
-        predictions.append({'prediction': prediction[0]})
+        predictions.append({
+            'Estado': scenario.Estado,
+            'Negocio': scenario.Negocio,
+            'prediction': prediction[0]
+        })
     
     return predictions
